@@ -1,1 +1,1 @@
-worker: python3 bot.py 7711
+worker: python3 bot.py 8443
