@@ -8,11 +8,20 @@ This program is dedicated to the public domain under the CC0 license.
 """
 import logging
 import telegram
+import datetime
 from telegram.error import NetworkError, Unauthorized
 from time import sleep
 
 
 update_id = None
+
+schedule_lanch = [
+    "*Italian Lanch*\n Supa Minestone si Paste Bologneze.", 
+    "*Moldova Lanch*\n Supa Minestone si Paste Bologneze.", 
+    "*India Lanch*\n Supa Minestone si Paste Bologneze.", 
+    "*America Lanch*\n Supa Minestone si Paste Bologneze.", 
+    "*Mexico Lanch*\n Supa Minestone si Paste Bologneze.", 
+]
 
 
 def main():
@@ -46,13 +55,12 @@ def echo(bot):
     # Request updates after the last update_id
     for update in bot.get_updates(offset=update_id, timeout=10):
         update_id = update.update_id + 1
+        lanch_nr_day = datetime.datetime.today().weekday()
 
         if update.message:  # your bot can receive updates without messages
             # Reply to the message
-            if update.message.text == 'ady':
-                update.message.reply_text('Adriana Starniciuc')
-            else:
-                update.message.reply_text(update.message.text)
+            if update.message.text == 'seasson':
+                update.message.reply_text(schedule_lanch[lanch_nr_day])
 
 if __name__ == '__main__':
     main()
