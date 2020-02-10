@@ -8,7 +8,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 sched = BlockingScheduler()
 update_id = None
 
-@sched.scheduled_job('cron', day_of_week='mon-fri', hour=23, minutes=19)
+@sched.scheduled_job('cron', day_of_week='mon-fri', hour=21, minutes=20)
 def scheduled_job():
     """Run the bot."""
     global update_id
