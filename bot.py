@@ -49,7 +49,11 @@ def echo(bot):
 
         if update.message:  # your bot can receive updates without messages
             # Reply to the message
-            update.message.reply_text(update.message.text)
+            if update.message.text == 'ady':
+                update.message.reply_text('Adriana Starniciuc')
+            else
+                update.message.reply_text(update.message.text)
+
 
 
 if __name__ == '__main__':
