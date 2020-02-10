@@ -51,10 +51,8 @@ def echo(bot):
             # Reply to the message
             if update.message.text == 'ady':
                 update.message.reply_text('Adriana Starniciuc')
-            else
+            else:
                 update.message.reply_text(update.message.text)
-
-
 
 if __name__ == '__main__':
     main()
