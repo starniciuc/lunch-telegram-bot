@@ -8,7 +8,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 sched = BlockingScheduler()
 update_id = None
 
-@sched.scheduled_job('cron', day_of_week='mon-fri', hour=23, minutes=3)
+@sched.scheduled_job('cron', day_of_week='mon-fri', hour=23, minutes=8)
 def scheduled_job():
     """Run the bot."""
     global update_id
@@ -40,7 +40,6 @@ def echo(bot):
     # Request updates after the last update_id
     for update in bot.get_updates(offset=update_id, timeout=10):
         update_id = update.update_id + 1
-        lanch_nr_day = datetime.datetime.today().weekday()
 
         if update.message:  # your bot can receive updates without messages
             # Reply to the message
