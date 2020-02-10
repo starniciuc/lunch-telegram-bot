@@ -16,11 +16,11 @@ from time import sleep
 update_id = None
 
 schedule_lanch = [
-    "**Italian Lunch**\n - Supa Minestrone \n - Paste Bolognese", 
-    "**Moldovan Luuch**\n - Zeama \n - Mamaliga cu tocana de pui", 
-    "**Indian Lunch**\n - Supa cu somon \n - File de pui cu sos curry si orez", 
-    "**American Lunch**\n - Supa crema de ciuperci \n - Costita de porc cu sos BBQ si cartofi copti", 
-    "**Mexican Lunch**\n - Supa picanta de fasole \n - Fajitas de vita cu legume", 
+    "*Italian Lunch*\n - Supa Minestrone \n - Paste Bolognese", 
+    "*Moldovan Luuch*\n - Zeama \n - Mamaliga cu tocana de pui", 
+    "*Indian Lunch*\n - Supa cu somon \n - File de pui cu sos curry si orez", 
+    "*American Lunch*\n - Supa crema de ciuperci \n - Costita de porc cu sos BBQ si cartofi copti", 
+    "*Mexican Lunch*\n - Supa picanta de fasole \n - Fajitas de vita cu legume", 
 ]
 
 def main():
@@ -58,8 +58,8 @@ def echo(bot):
 
         if update.message:  # your bot can receive updates without messages
             # Reply to the message
-            if update.message.text == 'seasson':
-                update.message.reply_text(schedule_lanch[lanch_nr_day])
+            if update.message.text == 'sesson?':
+                update.message.reply_text(schedule_lanch[lanch_nr_day], parse_mode=telegram.ParseMode.MARKDOWN)
 
 if __name__ == '__main__':
     main()
