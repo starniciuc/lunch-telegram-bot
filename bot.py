@@ -16,13 +16,12 @@ from time import sleep
 update_id = None
 
 schedule_lanch = [
-    "*Italian Lanch*\n Supa Minestone si Paste Bologneze.", 
-    "*Moldova Lanch*\n Supa Minestone si Paste Bologneze.", 
-    "*India Lanch*\n Supa Minestone si Paste Bologneze.", 
-    "*America Lanch*\n Supa Minestone si Paste Bologneze.", 
-    "*Mexico Lanch*\n Supa Minestone si Paste Bologneze.", 
+    "**Italian Lunch**\n - Supa Minestrone \n - Paste Bolognese", 
+    "**Moldovan Luuch**\n - Zeama \n - Mamaliga cu tocana de pui", 
+    "**Indian Lunch**\n - Supa cu somon \n - File de pui cu sos curry si orez", 
+    "**American Lunch**\n - Supa crema de ciuperci \n - Costita de porc cu sos BBQ si cartofi copti", 
+    "**Mexican Lunch**\n - Supa picanta de fasole \n - Fajitas de vita cu legume", 
 ]
-
 
 def main():
     """Run the bot."""
