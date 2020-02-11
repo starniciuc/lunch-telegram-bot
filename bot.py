@@ -15,6 +15,14 @@ schedule_lanch = [
     "*Mexican Lunch*\n - Supa picanta de fasole \n - Fajitas de vita cu legume", 
 ]
 
+don_taco_lunch_menu = [
+    "*49 MDL*\n - Zeama \n - Hrisca cu tocana de pui",
+    "*49 MDL*\n - Supa zilei \n - Hrisca pohodu sau paste",
+    "*49 MDL*\n - Zeama \n - Hrisca cu tocana de pui",
+    "*49 MDL*\n - Zeama \n - Hrisca cu tocana de pui",
+    "*49 MDL*\n - Zeama \n - Hrisca cu tocana de pui",
+]
+
 def main():
     """Run the bot."""
     global update_id
@@ -48,12 +56,17 @@ def echo(bot):
         update_id = update.update_id + 1
         lanch_nr_day = datetime.datetime.today().weekday()
         now = datetime.datetime.now()
+        user_name = update.user.first
         if update.message:  # your bot can receive updates without messages
             # Reply to the message
             if update.message.text == 'seasons?':
                 update.message.reply_text(schedule_lanch[lanch_nr_day], parse_mode=telegram.ParseMode.MARKDOWN)
+            if update.message.text == 'dontaco?':
+                update.message.reply_text(don_taco_lunch_menu[lanch_nr_day], parse_mode=telegram.ParseMode.MARKDOWN)
             if update.message.text == 'time?':
-                update.message.reply_text(now.strftime("%H:%M:%S"))
+                update.message.reply_text(now.strftime("%H:%M:%S"))            
+            if update.message.text == '15min':
+                update.message.reply_text(user_name + ' bleeaaa iar!!!')
 
 if __name__ == '__main__':
     main()
