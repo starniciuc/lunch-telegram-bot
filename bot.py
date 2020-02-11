@@ -65,6 +65,8 @@ def echo(bot):
             global message
             if update.message.from_user:
                 name = update.message.from_user.name
+            
+            # bot.send_message(chat_id=chat_id, text='Azzziii e vineeereaa!!!! https://www.youtube.com/watch?v=TAJ4WHNFwck', parse_mode=telegram.ParseMode.MARKDOWN)
             # Reply to the message
             if isSeasons(update.message.text):
                 message = schedule_lanch[lanch_nr_day]
