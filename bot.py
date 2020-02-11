@@ -56,7 +56,7 @@ def echo(bot):
         update_id = update.update_id + 1
         lanch_nr_day = datetime.datetime.today().weekday()
         now = datetime.datetime.now()
-        user_name = update.message.from_user.name()
+        user_name = update.message.from_user.name
         chat_id = bot.get_updates()[-1].message.chat_id
     
         if update.message:  # your bot can receive updates without messages
