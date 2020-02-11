@@ -68,15 +68,19 @@ def echo(bot):
             # Reply to the message
             if isSeasons(update.message.text):
                 message = schedule_lanch[lanch_nr_day]
+                bot.send_message(chat_id=chat_id, text=message, parse_mode=telegram.ParseMode.MARKDOWN)
             if isDonTaco(update.message.text):
                 message = don_taco_lunch_menu[lanch_nr_day]
+                bot.send_message(chat_id=chat_id, text=message, parse_mode=telegram.ParseMode.MARKDOWN)
             if update.message.text == 'time?':
-                message = now.strftime("%H:%M:%S")         
+                message = now.strftime("%H:%M:%S")     
+                bot.send_message(chat_id=chat_id, text=message, parse_mode=telegram.ParseMode.MARKDOWN)    
             if update.message.text == '15min':
                 message = str(name) + ' bleeaaa iar!!!' 
+                bot.send_message(chat_id=chat_id, text=message, parse_mode=telegram.ParseMode.MARKDOWN)
             if update.message.text == 'coffe?':
                 message = 'Jos sau la balcon?'
-            bot.send_message(chat_id=chat_id, text=message, parse_mode=telegram.ParseMode.MARKDOWN)
+                bot.send_message(chat_id=chat_id, text=message, parse_mode=telegram.ParseMode.MARKDOWN)
 
 if __name__ == '__main__':
     main()

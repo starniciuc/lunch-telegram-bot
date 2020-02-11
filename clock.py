@@ -1,8 +1,5 @@
-import logging
 import telegram
-import datetime
-from telegram.error import NetworkError, Unauthorized
-from time import sleep
+
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 sched = BlockingScheduler()
