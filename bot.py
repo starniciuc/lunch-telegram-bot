@@ -56,10 +56,12 @@ def echo(bot):
         update_id = update.update_id + 1
         lanch_nr_day = datetime.datetime.today().weekday()
         now = datetime.datetime.now()
-        user_name = update.message.from_user.name
         chat_id = bot.get_updates()[-1].message.chat_id
-    
+        
         if update.message:  # your bot can receive updates without messages
+            global name
+            if update.message.from_user:
+                name = update.message.from_user.name
             # Reply to the message
             if update.message.text == 'seasons?':
                 bot.send_message(chat_id=chat_id, text=schedule_lanch[lanch_nr_day], parse_mode=telegram.ParseMode.MARKDOWN)
@@ -68,7 +70,7 @@ def echo(bot):
             if update.message.text == 'time?':
                 update.message.reply_text(now.strftime("%H:%M:%S"))            
             if update.message.text == '15min':
-                update.message.reply_text(user_name + ' bleeaaa iar!!!')
+                update.message.reply_text(str(name) + ' bleeaaa iar!!!')
 
 if __name__ == '__main__':
     main()
