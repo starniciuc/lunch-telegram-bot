@@ -50,7 +50,7 @@ def echo(bot):
         now = datetime.datetime.now()
         if update.message:  # your bot can receive updates without messages
             # Reply to the message
-            if update.message.text == 'sesson?':
+            if update.message.text == 'seasons?':
                 update.message.reply_text(schedule_lanch[lanch_nr_day], parse_mode=telegram.ParseMode.MARKDOWN)
             if update.message.text == 'time?':
                 update.message.reply_text(now.strftime("%H:%M:%S"))
