@@ -47,6 +47,8 @@ def main():
             # The user has removed or blocked the bot.
             update_id += 1
 
+isSeasons = lambda text: text == 'seasons?'
+isDonTaco = lambda text: text == 'dontaco?'
 
 def echo(bot):
     """Echo the message the user sent."""
@@ -60,17 +62,21 @@ def echo(bot):
         
         if update.message:  # your bot can receive updates without messages
             global name
+            global message
             if update.message.from_user:
                 name = update.message.from_user.name
             # Reply to the message
-            if update.message.text == 'seasons?':
-                bot.send_message(chat_id=chat_id, text=schedule_lanch[lanch_nr_day], parse_mode=telegram.ParseMode.MARKDOWN)
-            if update.message.text == 'dontaco?':
-                update.message.reply_text(don_taco_lunch_menu[lanch_nr_day], parse_mode=telegram.ParseMode.MARKDOWN)
+            if isSeasons(update.message.text):
+                message = schedule_lanch[lanch_nr_day]
+            if isDonTaco(update.message.text):
+                message = don_taco_lunch_menu[lanch_nr_day]
             if update.message.text == 'time?':
-                update.message.reply_text(now.strftime("%H:%M:%S"))            
+                message = now.strftime("%H:%M:%S")         
             if update.message.text == '15min':
-                update.message.reply_text(str(name) + ' bleeaaa iar!!!')
+                message = str(name) + ' bleeaaa iar!!!' 
+            if update.message.text == 'coffe?':
+                message = 'Jos sau la balcon?'
+            bot.send_message(chat_id=chat_id, text=message, parse_mode=telegram.ParseMode.MARKDOWN)
 
 if __name__ == '__main__':
     main()
