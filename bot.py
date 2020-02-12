@@ -1,9 +1,19 @@
 import logging
 import telegram
 import datetime
+import os
 from telegram.error import NetworkError, Unauthorized
 from time import sleep
 
+TOKEN = os.environ.get('TOKEN', "")
+PORT = int(os.environ.get('PORT', '8443'))
+updater = Updater(TOKEN)
+# add handlers
+updater.start_webhook(listen="0.0.0.0",
+                      port=PORT,
+                      url_path=TOKEN)
+updater.bot.set_webhook("https://lanchtime-bot.herokuapp.com/" + TOKEN)
+updater.idle()
 
 update_id = None
 
@@ -27,7 +37,7 @@ def main():
     """Run the bot."""
     global update_id
     # Telegram Bot Authorization Token
-    bot = telegram.Bot('1083569431:AAH0uZC0dvSndasusLN_c5szzvgTKUMjEak')
+    bot = telegram.Bot(TOKEN)
 
     # get the first pending update_id, this is so we can skip over it in case
     # we get an "Unauthorized" exception.
