@@ -6,7 +6,7 @@ import json
 from telegram.error import NetworkError, Unauthorized
 from time import sleep
 
-TOKEN = os.environ.get('TOKEN', "985783677:AAH53tn4zRFXcP_OxvXh_QyAU9Mbckylvp8")
+TOKEN = os.environ.get('TOKEN', "")
 PORT = int(os.environ.get('PORT', '8443'))
 #updater = Updater(TOKEN)
 # add handlers
