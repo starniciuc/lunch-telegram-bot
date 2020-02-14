@@ -2,45 +2,29 @@ import logging
 import telegram
 import datetime
 import os
+import json
 from telegram.error import NetworkError, Unauthorized
 from time import sleep
 
-TOKEN = os.environ.get('TOKEN', "")
+TOKEN = os.environ.get('TOKEN', "985783677:AAH53tn4zRFXcP_OxvXh_QyAU9Mbckylvp8")
 PORT = int(os.environ.get('PORT', '8443'))
-updater = Updater(TOKEN)
+#updater = Updater(TOKEN)
 # add handlers
-updater.start_webhook(listen="0.0.0.0",
-                      port=PORT,
-                      url_path=TOKEN)
-updater.bot.set_webhook("https://lanchtime-bot.herokuapp.com/" + TOKEN)
-updater.idle()
+#updater.start_webhook(listen="0.0.0.0",
+#                      port=PORT,
+#                      url_path=TOKEN)
+#updater.bot.set_webhook("https://lanchtime-bot.herokuapp.com/" + TOKEN)
+#updater.idle()
 
 update_id = None
-
-schedule_lanch = [
-    "*Italian Lunch*\n - Supa Minestrone \n - Paste Bolognese", 
-    "*Moldovan Lunch*\n - Zeama \n - Mamaliga cu tocana de pui", 
-    "*Indian Lunch*\n - Supa cu somon \n - File de pui cu sos curry si orez", 
-    "*American Lunch*\n - Supa crema de ciuperci \n - Costita de porc cu sos BBQ si cartofi copti", 
-    "*Mexican Lunch*\n - Supa picanta de fasole \n - Fajitas de vita cu legume", 
-]
-
-don_taco_lunch_menu = [
-    "*49 MDL*\n - Zeama \n - Hrisca cu tocana de pui",
-    "*49 MDL*\n - Supa zilei \n - Hrisca pohodu sau paste",
-    "*49 MDL*\n - Zeama \n - Hrisca cu tocana de pui",
-    "*49 MDL*\n - Zeama \n - Hrisca cu tocana de pui",
-    "*49 MDL*\n - Zeama \n - Hrisca cu tocana de pui",
-]
+data = {}
 
 def main():
-    """Run the bot."""
     global update_id
-    # Telegram Bot Authorization Token
+    global data
     bot = telegram.Bot(TOKEN)
-
-    # get the first pending update_id, this is so we can skip over it in case
-    # we get an "Unauthorized" exception.
+    with open('data.json') as json_file:
+        data = json.load(json_file)
     try:
         update_id = bot.get_updates()[0].update_id
     except IndexError:
@@ -54,45 +38,33 @@ def main():
         except NetworkError:
             sleep(1)
         except Unauthorized:
-            # The user has removed or blocked the bot.
             update_id += 1
 
-isSeasons = lambda text: text == 'seasons?'
-isDonTaco = lambda text: text == 'dontaco?'
-
 def echo(bot):
-    """Echo the message the user sent."""
     global update_id
-    # Request updates after the last update_id
+    global data
     for update in bot.get_updates(offset=update_id, timeout=10):
         update_id = update.update_id + 1
-        lanch_nr_day = datetime.datetime.today().weekday()
+        lunch_nr_day = datetime.datetime.today().weekday()
         now = datetime.datetime.now()
         chat_id = bot.get_updates()[-1].message.chat_id
         
-        if update.message:  # your bot can receive updates without messages
-            global name
-            global message
+        if update.message:
+            name = ''
+            message = ''
             if update.message.from_user:
                 name = update.message.from_user.name
-            
-            # bot.send_message(chat_id=chat_id, text='Azzziii e vineeereaa!!!! https://www.youtube.com/watch?v=TAJ4WHNFwck', parse_mode=telegram.ParseMode.MARKDOWN)
-            # Reply to the message
-            if isSeasons(update.message.text):
-                message = schedule_lanch[lanch_nr_day]
-                bot.send_message(chat_id=chat_id, text=message, parse_mode=telegram.ParseMode.MARKDOWN)
-            if isDonTaco(update.message.text):
-                message = don_taco_lunch_menu[lanch_nr_day]
-                bot.send_message(chat_id=chat_id, text=message, parse_mode=telegram.ParseMode.MARKDOWN)
-            if update.message.text == 'time?':
-                message = now.strftime("%H:%M:%S")     
-                bot.send_message(chat_id=chat_id, text=message, parse_mode=telegram.ParseMode.MARKDOWN)    
+            try:
+                if data[update.message.text]:
+                    message = data[update.message.text][lunch_nr_day]
+            except:
+                print(data)
+                message = 'Not found'    
             if update.message.text == '15min':
                 message = str(name) + ' bleeaaa iar!!!' 
-                bot.send_message(chat_id=chat_id, text=message, parse_mode=telegram.ParseMode.MARKDOWN)
             if update.message.text == 'coffe?':
                 message = 'Jos sau la balcon?'
-                bot.send_message(chat_id=chat_id, text=message, parse_mode=telegram.ParseMode.MARKDOWN)
-
+            bot.send_message(chat_id=chat_id, text=message, parse_mode=telegram.ParseMode.MARKDOWN)
+    
 if __name__ == '__main__':
     main()

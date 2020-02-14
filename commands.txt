@@ -1,0 +1,6 @@
+- Hey P
++ ce doriti?
+- cei azi la lunch
+cei - action
+azi - date
+lunch - subject
